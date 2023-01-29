@@ -1,0 +1,85 @@
+version: "3.1"
+
+stories:
+
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_great
+#   - action: utter_happy
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+# - story: goal path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: deny
+#   - action: utter_goodbye
+
+# - story: goal path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: affirm
+#   - action: utter_goal
+#   - intent: find_internship
+#     entities:
+#     - location: Delhi
+#   - action: utter_domain
+#   - intent: available_domains
+#   - action: utter_domains
+#   - intent: area_of_interest
+#     entities:
+#     - field: App Development
+#   - action: utter_mode
+#   - intent: mode_of_work
+#     entities:
+#     - mode: hybrid
+#   - action: utter_location
+#   - intent: place_of_work
+#     entities:
+#     - location: Delhi
+#   - action: utter_type
+#   - intent: stipend
+#     entities:
+#     - kind_of: paid
+#   - action: utter_search
+
+# - story: goal path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: affirm
+#   - action: utter_goal
+#   - intent: find_internship
+#   - action: utter_domain
+#   - intent: area_of_interest
+#   - action: utter_mode
+#   - intent: mode_of_work
+#   - action: utter_location
+#   - intent: place_of_work
+#   - action: utter_type
+#   - intent: stipend
+#   - action: utter_search  
+
+

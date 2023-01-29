@@ -1,0 +1,124 @@
+version: "3.1"
+
+rules:
+
+- rule: Greet User
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Activate internship form
+  steps:
+  - intent: find_internship
+  - action: internship_form
+  - active_loop: internship_form
+
+- rule: Submit internship form
+  condition:
+  # Condition that form is active.
+  - active_loop: internship_form
+  steps:
+  # Form is deactivated
+  - action: internship_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_slots_values_internship
+  - action: utter_search
+
+# Add unhappy internship form rule
+
+
+
+
+- rule: Activate job form
+  steps:
+  - intent: find_job
+  - action: job_form
+  - active_loop: job_form
+
+- rule: Submit job form
+  condition:
+  # Condition that form is active.
+  - active_loop: job_form
+  steps:
+  # Form is deactivated
+  - action: job_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_slots_values_job
+  - action: utter_search
+
+- rule: Activate opportunity form
+  steps:
+  - intent: find_opportunity
+  - action: opportunity_form
+  - active_loop: opportunity_form
+
+- rule: Submit opportunity form
+  condition:
+  # Condition that form is active.
+  - active_loop: opportunity_form
+  steps:
+  # Form is deactivated
+  - action: opportunity_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_slots_values_opportunity
+  - action: utter_search
+
+# #internship form validation
+# - rule: Validate internship form
+#   condition:
+#   - active_loop: internship_form
+#   steps:
+#   - action: validate_internship_form
+#   - active_loop: internship_form
+#   - slot_was_set:
+#     - requested_slot: null
+
+# #job form validation
+# - rule: Validate job form
+#   condition:
+#   - active_loop: job_form
+#   steps:
+#   - action: validate_job_form
+#   - active_loop: job_form
+#   - slot_was_set:
+#     - requested_slot: null
+  
+# #opportunity form validation
+# - rule: Validate opportunity form
+#   condition:
+#   - active_loop: opportunity_form
+#   steps:
+#   - action: validate_opportunity_form
+#   - active_loop: opportunity_form
+#   - slot_was_set:
+#     - requested_slot: null
+
+- rule: out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase

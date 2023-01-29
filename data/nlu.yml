@@ -1,0 +1,202 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - sure
+    - okay
+    - yes please
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - nope
+    - no thanks
+    - nahh
+    - nah
+
+- intent: find_internship
+  examples: |
+    - How to get internship?
+    - Find internships near me.
+    - Find internships in [Delhi](location).
+    - Internships for [web development](field).
+    - I am looking for internships.
+    - I want to find internships.
+    - I want to find internships in [Delhi](location).
+    - I want to find internships in [Delhi](location) for [web development](field).
+    - I want to find internships for [web development](field).
+    - I want to find internships for [web development](field) in [Delhi](location).
+    
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: stipend
+  examples: |
+    - I want [paid](kind_of) internships.
+    - [paid](kind_of)
+    - Look for [paid](kind_of)
+    - I want [unpaid](kind_of) internships.
+    - [unpaid](kind_of)
+    - [paid](kind_of)
+
+- intent: place_of_work
+  examples: |
+    - I want [Delhi](location) based internships.
+    - I want internships in [Delhi](location).
+    - [Delhi](location).
+    - [Hyderabad](location).
+    - [Bangalore](location).
+
+- intent: area_of_interest
+  examples: |
+    - My domain is [App Development](field).
+    - My field of interest is [App development](field).
+    - [App development](field).
+    - [Web development](field).
+    - [Software engineering](field).
+    - I want internships in [App development](field).
+    - I would like to work in [App development](field).
+    - [App development](field) sounds good.
+
+- intent: available_domains
+  examples: |
+    - I am confused.
+    - I have yet not decided.
+    - I am not sure.
+    - I have interest in more than one domains.
+    - Can you suggest me some domains?
+    - Show me a list of available domains.
+
+- intent: mode_of_work
+  examples: |
+    - [hybrid](mode)
+    - [offline] (mode)
+    - [online](mode)
+    - I want (offline)[mode] internships.
+    - [online](mode) internships.
+    - work from home.
+    - anything.
+    - I am not sure.
+    - I want to work in [hybrid](mode) mode.
+    - [Work from Home](mode).
+    - [Work from office](mode).
+    - [Work from anywhere](mode).
+    - [hybrid](mode) mode.
+
+- intent: find_job
+  examples: |
+    - I want to find a job.
+    - I want to find a job in [Delhi](location).
+    - I want to find a job in [App development](field).
+    - I want to find a job in [hybrid](mode) mode.
+    - I want to find a job in [Delhi](location) in [App development](field).
+    - I am looking for a job.
+    - Show me a list of available jobs.
+
+- intent: find_opportunity
+  examples: |
+    - I want to find an opportunity.
+    - I want to find a [scholarship](category) in [Delhi](location).
+    - I am looking for a [national](level) [scholarship](category).
+    - I want to find a [courses](category) in [App development](field).
+    - I want to find a [conference] in [hybrid](mode) mode.
+    - I want to find an opportunity in [Delhi](location) in [App development](field).
+    - I am looking for an opportunity.
+    - Show me a list of available opportunities.
+    - Show me some [international](level) [fellowships](category).
+
+- intent: scale_of_opportunity
+  examples: |
+    - I want [national](level) opportunities.
+    - I want [international](level) opportunities.
+    - [national](level)
+    - [international](level)
+    - I am looking for [national](level) opportunities.
+    - Show me some [national](level) opportunities.
+
+- intent: type_of_opportunity
+  examples: |
+    - I want [scholarships](category) opportunities.
+    - I want [fellowships](category) opportunities.
+    - I want [courses](category) opportunities.
+    - I want [conference](category) opportunities.
+    - [scholarships](category)
+    - [fellowships](category)
+    - [courses](category)
+    - [conference](category)
+    - I am looking for [scholarships](category) opportunities.
+    - Show me some [scholarships](category) opportunities.
+    - [Scholarship](category)
+    - [Fellowship](category)
+    - [Course](category)
+    - [Conference](category)
+
+- intent: out_of_scope
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+

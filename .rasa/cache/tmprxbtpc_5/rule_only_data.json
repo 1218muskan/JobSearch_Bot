@@ -1,0 +1,8 @@
+{
+  "rule_only_slots": [],
+  "rule_only_loops": [
+    "opportunity_form",
+    "job_form",
+    "internship_form"
+  ]
+}

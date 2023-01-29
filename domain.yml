@@ -1,0 +1,890 @@
+version: "3.1"
+
+intents:
+  - greet:
+      use_entities: []
+  - goodbye:
+      use_entities: []
+  - affirm:
+      use_entities: []
+  - deny:
+      use_entities: []
+  - mood_great:
+      use_entities: []
+  - mood_unhappy:
+      use_entities: []
+  - bot_challenge:
+      use_entities: []
+  - stipend:
+      use_entities: 
+        - kind_of
+  - place_of_work:
+      use_entities: 
+        - location
+  - area_of_interest:
+      use_entities: 
+        - field
+  - available_domains:
+      use_entities: []
+  - mode_of_work:
+      use_entities: 
+        - mode
+  - scale_of_opportunity:
+      use_entities: 
+        - level
+  - type_of_opportunity:
+      use_entities: 
+        - Type
+  - find_internship:
+      use_entities: 
+        - location
+        - field
+  - find_job:
+      use_entities: 
+        - location
+        - field
+  - find_opportunity:
+      use_entities: 
+        - location
+        - field
+        - Type
+
+
+entities:
+  - kind_of
+  - location
+  - field
+  - mode
+  - level
+  - Type
+  
+
+slots:
+  scale:
+    type: categorical
+    values:
+    - Local
+    - National
+    - International
+    mappings:
+    - type: from_entity
+      entity: level
+
+  category:
+    type: categorical
+    values:
+    - Scholarship
+    - Fellowship
+    - Courses
+    - Conference
+    mappings:
+    - type: from_entity
+      entity: Type
+
+  kind_of_internship:
+    type: categorical
+    values:
+    - paid
+    - unpaid
+    mappings:
+    - type: from_entity
+      entity: kind_of
+      intent: stipend
+    
+  placeofwork:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: location
+
+  domain_of_interest:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: field
+
+  work_mode:
+    type: categorical
+    values:
+    - online
+    - offline
+    - hybrid
+    mappings:
+    - type: from_entity
+      entity: mode
+
+forms:
+  internship_form:
+    required_slots:
+    - kind_of_internship
+    - placeofwork
+    - domain_of_interest
+    - work_mode
+  
+  job_form:
+    required_slots:
+    - placeofwork
+    - domain_of_interest
+    - work_mode
+  
+  opportunity_form:
+    required_slots:
+    - placeofwork
+    - domain_of_interest
+    - work_mode
+    - Type
+    - level
+
+# actions:
+# - validate_internship_form
+# - validate_job_form
+# - validate_opportunity_form
+
+lookup_tables:
+- name: location
+  elements:
+  - Delhi
+  - Mumbai
+  - Bangalore
+  - Chennai
+  - Hyderabad
+  - Kolkata
+  - Pune
+  - Ahmedabad
+  - Surat
+  - Jaipur
+  - Lucknow
+  - Kanpur
+  - Nagpur
+  - Indore
+  - Thane
+  - Bhopal
+  - Visakhapatnam
+  - Pimpri-Chinchwad
+  - Patna
+  - Vadodara
+  - Ghaziabad
+  - Ludhiana
+  - Coimbatore
+  - Agra
+  - Madurai
+  - Nashik
+  - Faridabad
+  - Meerut
+  - Rajkot
+  - Kalyan-Dombivali
+  - Vasai-Virar
+  - Varanasi
+  - Srinagar
+  - Aurangabad
+  - Dhanbad
+  - Amritsar
+  - Navi Mumbai
+  - Allahabad
+  - Ranchi
+  - Howrah
+  - Jabalpur
+  - Gwalior
+  - Vijayawada
+  - Jodhpur
+  - Raipur
+  - Kota
+  - Chandigarh
+  - Guwahati
+  - Solapur
+  - Hubli-Dharwad
+  - Tiruchirappalli
+  - Tiruppur
+  - Bareilly
+  - Moradabad
+  - Mysore
+  - Gurgaon
+  - Aligarh
+  - Jalandhar
+  - Bhubaneswar
+  - Salem
+  - Mira-Bhayandar
+  - Warangal
+  - Guntur
+  - Bhiwandi
+  - Gorakhpur
+  - Bhilai
+  - Amravati
+  - Noida
+  - Jamshedpur
+  - Bhavnagar
+  - Cuttack
+  - Firozabad
+  - Kollam
+  - Ajmer
+  - Akola
+  - Madanapalle
+  - Loni
+  - Ulhasnagar
+  - Jhansi
+  - Bhagalpur
+  - Malegaon
+  - Agartala
+  - Mangalore
+  - Belgaum
+  - Bhilwara
+  - Dehradun
+  - Asansol
+  - Jamnagar
+  - Ujjain
+  - Durgapur
+  - Dindigul
+  - Ambattur
+  - Kolhapur
+  - Gulbarga
+  - Jalgaon
+  - Udaipur
+  - Siliguri
+  - New York
+  - Los Angeles
+  - Chicago
+  - Houston
+  - Philadelphia
+  - Phoenix
+  - San Antonio
+  - San Diego
+  - Dallas
+  - San Jose
+  - Austin
+  - Jacksonville
+  - San Francisco
+  - Indianapolis
+  - Columbus
+  - Fort Worth
+  - Charlotte
+  - Detroit
+  - El Paso
+  - Memphis
+  - Boston
+  - Seattle
+  - Denver
+  - Washington
+  - Nashville
+  - Baltimore
+  - Louisville
+  - Milwaukee
+  - Portland
+  - Las Vegas
+  - Oklahoma City
+  - Albuquerque
+  - Tucson
+  - Fresno
+  - Sacramento
+  - London
+  - Birmingham
+  - Glasgow
+  - Leeds
+  - Sheffield
+  - Edinburgh
+  - Liverpool
+  - Bristol
+  - Manchester
+  - Cardiff
+  - Leicester
+  - Nottingham
+  - Newcastle upon Tyne
+  - Belfast
+  - Dublin
+  - Cork
+  - Limerick
+  - Galway
+  - Waterford
+  - Dundalk
+  - Derry
+
+- name: field
+  elements:
+  - Engineering
+  - Science
+  - Technology
+  - Arts
+  - Humanities
+  - Social Sciences
+  - Business
+  - Management
+  - Law
+  - Medicine
+  - Health
+  - Education
+  - Humanities
+  - Social Sciences
+  - Agriculture
+  - Environment
+  - Architecture
+  - Design
+  - Media
+  - Communication
+  - Performing Arts
+  - Visual Arts
+  - Fashion
+  - Journalism
+  - Library Science
+  - Religion
+  - Theology
+  - Philosophy
+  - History
+  - Languages
+  - Literature
+  - Anthropology
+  - Archaeology
+  - Geography
+  - Political Science
+  - Psychology
+  - Sociology
+  - Economics
+  - Finance
+  - Accounting
+  - Marketing
+  - Human Resources
+  - Information Systems
+  - Computer Science
+  - Engineering
+  - Mathematics
+  - Physics
+  - Chemistry
+  - Biology
+  - Earth Sciences
+  - Environmental Sciences
+  - Agriculture
+  - Architecture
+  - Design
+  - Construction
+  - Engineering
+  - Manufacturing
+  - Transportation
+  - Hospitality
+  - Tourism
+  - Culinary Arts
+  - Education
+  - Law
+  - Medicine
+  - Health
+  - Nursing
+  - Pharmacy
+  - Public Health
+  - Social Work
+  - Veterinary Medicine
+  - Arts
+  - Humanities
+  - Social Sciences
+  - Business
+  - Management
+  - Law
+  - Medicine
+  - Health
+  - Education
+  - Humanities
+  - Social Sciences
+  - Agriculture
+  - Environment
+  - Architecture
+  - Design
+  - Media
+  - Communication
+  - Performing Arts
+  - Visual Arts
+  - Fashion
+  - Journalism
+  - Library Science
+  - Religion
+  - Theology
+  - Philosophy
+  - History
+  - Languages
+  - Literature
+  - Anthropology
+  - Archaeology
+  - Geography
+  - Political Science
+  - Psychology
+  - Sociology
+  - Economics
+  - Finance
+  - Accounting
+  - Marketing
+  - Human Resources
+  - Information Systems
+  - Computer Science
+  - Engineering
+  - Mathematics
+  - Physics
+  - Chemistry
+  - Biology
+  - Software Development
+  - Web Development
+  - Mobile Development
+  - Game Development
+  - Data Science
+  - Machine Learning
+  - Artificial Intelligence
+  - Cyber Security
+  - Cloud Computing
+  - Database Administration
+  - Networking
+  - Software Engineering
+  - SWE
+  - SDE
+  - Software Development Engineering
+  - Software Development Engineer
+  - Software Development Engineer in Test
+
+
+- name: work_mode
+  elements:
+  - online
+  - offline
+  - hybrid
+
+- name: Type
+  elements:
+  - Internship
+  - Job
+  - Opportunity
+
+- name: level
+  elements:
+  - local
+  - zonal
+  - national
+  - international
+
+synonyms:
+- synonym: "internship"
+  examples: |
+    - internship
+    - intern
+    - trainee
+    - traineeship
+    - apprenticeship
+
+- synonym: "job"
+  examples: |
+    - job
+    - employment
+    - work
+    - career
+    - profession
+    - occupation
+    - vocation
+    - calling
+    - gig
+    - position
+    - placement
+    - post
+    - role
+    - slot
+    - vacancy
+    - berth
+    - billet
+    - office
+    - post
+    - situation
+    - station
+    - task
+    - work
+    - work assignment
+    - work detail
+    - work order
+    - work task
+    - work unit
+    - workweek
+    - job
+    - job assignment
+    - job detail
+    - job order
+    - job task
+    - job unit
+    - jobweek
+    - employment
+    - job
+    - line
+    - line of work
+    - livelihood
+    - means of earning a living
+    - métier
+    - profession
+    - vocation
+    - work
+    - work activity
+    - work area
+    - work field
+    - work domain
+    - work sphere
+    - work place
+    - work site
+    - work station
+    - work unit
+
+- synonym: "opportunity"
+  examples: |
+    - scholarship
+    - grant
+    - fellowship
+    - bursary
+    - award
+    - prize
+    - courses
+    - training
+    - workshop
+    - conference
+    - seminar
+    - lecture
+    - symposium
+    - congress
+    - convention
+    - exposition
+
+- synonym: "local"
+  examples: |
+    - local
+    - regional
+    - district
+    - state
+    - provincial
+    - territorial
+    - municipal
+    - county
+    - city
+    - town
+    - village
+    - neighborhood
+    - suburb
+    - borough
+    - township
+    - parish
+    - precinct
+    - ward
+    - zone
+    - area
+    - district
+    - division
+    - section
+    - sector
+    - zone
+    - belt
+    - block
+    - precinct
+    - quarter
+    - region
+    - area
+    - belt
+    - block
+    - district
+    - division
+    - field
+    - locality
+    - zonal
+
+- synonym: "national"
+  examples: |
+    - country
+    - nation
+
+- synonym: "offline"
+  examples: |
+    - work from office
+    - on-site
+    - on-premise
+    - on-location
+    - office
+    - office-based
+    - office-bound
+    - office-going
+    - office-oriented
+    - on location
+
+- synonym: "online"
+  examples: |
+    - work from home
+    - remote
+    - remote work
+    - telecommute
+    - telecommuting
+    - telework
+    - virtual
+    - virtual work
+    - work from anywhere
+    - work from anywhere in the world
+    - work from anywhere in the country
+    - work from anywhere in the state
+    - work from anywhere in the city
+    - work from anywhere in the town
+    - work from anywhere in the village
+    - work from anywhere in the neighborhood
+    - work from anywhere in the suburb
+    - work from anywhere in the borough
+    - work from anywhere in the township
+    - work from anywhere in the parish
+    - work from anywhere in the precinct
+    - work from anywhere in the ward
+    - work from anywhere in the zone
+    - work from anywhere in the area
+    - work from anywhere in the district
+    - work from anywhere in the division
+    - work from anywhere in the section
+    - work from anywhere in the sector
+    - work from anywhere in the zone
+    - work from anywhere in the belt
+    - work from anywhere in the block
+    - work from anywhere in the precinct
+    - work from anywhere in the quarter
+    - work from anywhere in the region
+    - work from anywhere in the area
+    - work from anywhere in the belt
+    - work from anywhere in the block
+    - work from anywhere in the district
+    - work from anywhere in the division
+    - work from anywhere in the field
+    - work from anywhere in the locality
+    - work from anywhere in the zonal
+    - work from anywhere in the country
+    - work from anywhere in the nation
+    - work from anywhere in the world
+    - work from anywhere in the continent
+    - work from anywhere in the state
+    - work from anywhere in the province
+    - work from anywhere in the territory
+    - work from anywhere in the municipality
+    - work from anywhere in the county
+    - work from anywhere in the city
+    - work from anywhere in the town
+    - work from anywhere in the village
+    - work from anywhere in the neighborhood
+    - work from anywhere in the suburb
+    - work from anywhere in the borough
+    - work from anywhere in the township
+
+- synonym: "hybrid"
+  examples: |
+    - both online and offline
+    - both remote and on-site
+    - either office or home
+    - either office or remote
+    - online or offline
+
+
+
+responses:
+  utter_greet:
+  - text: "Hey! What can I help you with today?"
+    buttons:
+    - title: "Internship"
+      payload: "/internship_form"
+    - title: "Job"
+      payload: "/job_form"
+    - title: "Opportunity"
+      payload: "/opportunity_form"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm" 
+    - title: "No"
+      payload: "/deny"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Oh! Sorry"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa and developed by students of IGDTUW."
+
+  utter_goal:
+  - text: "How can I help you?"
+    buttons:
+    - title: "Internship"
+      payload: "/internship_form"
+    - title: "Job"
+      payload: "/job_form"
+    - title: "Opportunity"
+      payload: "/opportunity_form"
+
+  utter_ask_domain_of_interest:
+  - text: "What is your field of interest?"
+    buttons:
+    - title: "App Development"
+      intent: "area_of_interest"
+      entities:
+        - field: "App Development"
+      payload: "/internship_form{{\"field\":\"App Development\"}}"
+    - title: "Web Development"
+      intent: "area_of_interest"
+      entities:
+        - field: "Web Development"
+      payload: "/internship_form{{\"field\":\"Web Development\"}}"
+    - title: "Software Engineering"
+      intent: "area_of_interest"
+      entities:
+        - field: "Software Engineering"
+      payload: "/internship_form{{\"field\":\"Software Engineering\"}}"
+
+  utter_domains:
+  - text: "Some of the available domains are- 
+           1. Web Development\n
+           2. Android Development\n
+           3. Cyber Security/Ethical Hacking\n
+           4. Marketing and Sales\n
+           5. Digital Marketing\n
+           6. Data Analyst\n
+           7. Content Writer"
+  - text: "What is your field of interest?"
+    buttons:
+    - title: "App Development"
+      intent: "area_of_interest"
+      entities:
+        - field: "App Development"
+      payload: "/internship_form{{\"field\":\"App Development\"}}"
+    - title: "Web Development"
+      intent: "area_of_interest"
+      entities:
+        - field: "Web Development"
+      payload: "/internship_form{{\"field\":\"Web Development\"}}"
+    - title: "Software Engineering"
+      intent: "area_of_interest"
+      entities:
+        - field: "Software Engineering"
+      payload: "/internship_form{{\"field\":\"Software Engineering\"}}"
+
+  utter_ask_work_mode:
+  - text: "What is your preffered mode of internship?"
+    buttons:
+    - title: "Work from home"
+      intent: "mode_of_work"
+      entities:
+        - mode: "online"
+      payload: "/internship_form{{\"mode\":\"online\"}}"
+    - title: "Work from office"
+      intent: "mode_of_work"
+      entities:
+        - mode: "offline"
+      payload: "/internship_form{{\"mode\":\"offline\"}}"
+    - title: "Hybrid"
+      intent: "mode_of_work"
+      entities:
+        - mode: "hybrid"
+      payload: "/internship_form{{\"mode\":\"hybrid\"}}"
+      
+
+  utter_ask_placeofwork:
+  - text: "Enter your preferred location of work."
+    buttons:
+    - title: "Delhi"
+      intent: "place_of_work"
+      entities:
+        - location: "Delhi"
+      payload: "/internship_form{{\"location\":\"Delhi\"}}"
+    - title: "Hyderabad"
+      intent: "place_of_work"
+      entities:
+        - location: "Hyderabad"
+      payload: "/internship_form{{\"location\":\"Hybrid\"}}"
+    - title: "Bangalore"
+      intent: "place_of_work"
+      entities:
+        - location: "Bangalore"
+      payload: "/internship_form{{\"location\":\"Bangalore\"}}"
+
+  utter_ask_kind_of_internship:
+  - text: "Paid/Unpaid type?"
+    buttons:
+    - title: "Paid"
+      intent: "stipend"
+      entities:
+        - kind_of: "paid"
+      payload: "/internship_form{{\"kind_of\":\"paid\"}}"
+    - title: "Unpaid"
+      intent: "stipend"
+      entities:
+        - kind_of: "unpaid"
+      payload: "/internship_form{{\"kind_of\":\"paid\"}}"
+
+  utter_ask_level:
+  - text: "Are you looking for local, national or international opportunities?"
+    buttons:
+    - title: "Local/Regional"
+      intent: "scale_of_opportunity"
+      entities:
+        - level: "local"
+    - title: "National"
+      intent: "scale_of_opportunity"
+      entities:
+        - level: "national"
+    - title: "International"
+      intent: "scale_of_opportunity"
+      entities:
+        - level: "international"
+
+  utter_ask_Type:
+  - text: "What type of opportunity are you looking for? (Scholarships/ Fellowships/ Courses/ Conferences)"
+    buttons:
+    - title: "Scholarships"
+      intent: "type_of_opportunity"
+      entities: 
+        - Type: "scholarship"
+    - title: "Fellowships"
+      intent: "type_of_opportunity"
+      entities: 
+        - Type: "fellowship"
+    - title: "Courses"
+      intent: "type_of_opportunity"
+      entities: 
+        - Type: "course"
+    - title: "Conference"
+      intent: "type_of_opportunity"
+      entities: 
+        - Type: "conference"
+
+  utter_search:
+  - text: "Results will be available soon..."
+  
+  utter_slots_values_internship:
+  - text: "The following are the details you have provided:
+           Domain: {domain_of_interest}
+           Mode of work: {work_mode}
+           Place of work: {placeofwork}
+           Stipend: {kind_of_internship}"
+
+  utter_slots_values_job:
+  - text: "The following are the details you have provided:
+           Domain: {domain_of_interest}
+           Mode of work: {work_mode}
+           Place of work: {placeofwork}"
+
+  utter_slots_values_opportunity:
+  - text: "The following are the details you have provided:
+           Type: {category}
+           Level: {scale}
+           Domain: {domain_of_interest}
+           Mode of work: {work_mode}
+           Place of work: {placeofwork}"
+
+
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request. 
+
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you please rephrase? 
+
+  utter_default:
+  - text: Sorry, I didn't get that. Try asking something else.
+
+
+  
+config:
+  store_entities_as_slots: true
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
