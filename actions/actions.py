@@ -25,9 +25,13 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
+from bs4 import BeautifulSoup
+import os
+from dotenv import load_dotenv
 import json
 import random
 import datetime
+import requests
 from typing import Dict, Text, Any, List, Optional
 import logging
 from rasa_sdk.interfaces import Action
@@ -48,6 +52,22 @@ from rasa_sdk.types import DomainDict
 
 
 logger = logging.getLogger(__name__)
+
+def linkedin_scraper(webpage, page_number):
+    results = []
+    next_page = webpage + str(page_number)
+    print(str(next_page))
+    response = requests.get(str(next_page))
+    soup = BeautifulSoup(response.content,'html.parser')
+    
+    jobs = soup.find_all('div', class_='base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card')
+    for job in jobs:
+        job_title = job.find('h3', class_='base-search-card__title').text.strip()
+        job_company = job.find('h4', class_='base-search-card__subtitle').text.strip()
+        job_location = job.find('span', class_='job-search-card__location').text.strip()
+        job_link = job.find('a', class_='base-card__full-link')['href']
+        results.append({'job_title': job_title, 'job_company': job_company, 'job_location': job_location, 'job_link': job_link})
+    return results
 
 class ActionInternship(Action):
 
@@ -310,7 +330,7 @@ class ActionOpportunity(Action):
         # If found, return the opportunity
         # If not found, return None
         # If multiple found, return all of them in a list
-
+        
 
         dispatcher.utter_message("We have received the following information:")
         dispatcher.utter_message("Type: {}".format(Type))
@@ -319,3 +339,32 @@ class ActionOpportunity(Action):
         dispatcher.utter_message("domain of interest: {}".format(domain_of_interest))
         dispatcher.utter_message("work mode: {}".format(work_mode))
         return [SlotSet(slot, None) for slot in slots]
+
+class ActionJobSearch(Action):
+    def name(self) -> Text:
+        """Unique identifier for the action."""
+        return "jobsearch"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Queries the API for the job search"""
+        # Get the slots
+        placeofwork = tracker.get_slot("placeofwork")
+        domain_of_interest = tracker.get_slot("domain_of_interest")
+        work_mode = tracker.get_slot("work_mode")
+        # Query the API
+        # If found, return the job
+        # If not found, return None
+        # If multiple found, return all of them in a list
+        #open application.p pickle
+        #load env variables from dotenv
+        results = linkedin_scraper('http://api.scraperapi.com?api_key=2b8b6e031d0f2382dff9abcd159cba20&url=https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={domain}&location={location}&geoId=115918471&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&start='.format(domain=domain_of_interest.replace(" ","%20"), location=placeofwork.replace(" ","%20")), 0)
+        #dispatch top 5 jobs
+        dispatcher.utter_message("Here are the top 5 jobs for you:")
+        for i in range(5):
+            dispatcher.utter_message(text="Job title: {}".format(results[i]['title']))
+            dispatcher.utter_message(text="Company: {}".format(results[i]['company']))
+            dispatcher.utter_message(text="Location: {}".format(results[i]['location']))
+            dispatcher.utter_message(text="Link: {}".format(results[i]['link']))
+        return []

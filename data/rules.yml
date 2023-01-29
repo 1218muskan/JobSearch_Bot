@@ -35,7 +35,7 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_slots_values_internship
-  - action: utter_search
+  - action: jobsearch
 
 # Add unhappy internship form rule
 
@@ -60,7 +60,7 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_slots_values_job
-  - action: utter_search
+  - action: jobsearch
 
 - rule: Activate opportunity form
   steps:
@@ -80,7 +80,7 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_slots_values_opportunity
-  - action: utter_search
+  - action: jobsearch
 
 # #internship form validation
 # - rule: Validate internship form

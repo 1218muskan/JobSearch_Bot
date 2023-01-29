@@ -135,7 +135,8 @@ forms:
     - Type
     - level
 
-# actions:
+actions:
+  - jobsearch
 # - validate_internship_form
 # - validate_job_form
 # - validate_opportunity_form
