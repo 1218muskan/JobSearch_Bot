@@ -1,64 +1,60 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet:
-      use_entities: []
-  - goodbye:
-      use_entities: []
-  - affirm:
-      use_entities: []
-  - deny:
-      use_entities: []
-  - mood_great:
-      use_entities: []
-  - mood_unhappy:
-      use_entities: []
-  - bot_challenge:
-      use_entities: []
-  - stipend:
-      use_entities: 
-        - kind_of
-  - place_of_work:
-      use_entities: 
-        - location
-  - area_of_interest:
-      use_entities: 
-        - field
-  - available_domains:
-      use_entities: []
-  - mode_of_work:
-      use_entities: 
-        - mode
-  - scale_of_opportunity:
-      use_entities: 
-        - level
-  - type_of_opportunity:
-      use_entities: 
-        - Type
-  - find_internship:
-      use_entities: 
-        - location
-        - field
-  - find_job:
-      use_entities: 
-        - location
-        - field
-  - find_opportunity:
-      use_entities: 
-        - location
-        - field
-        - Type
-
-
+- affirm:
+    use_entities: []
+- area_of_interest:
+    use_entities:
+    - field
+- available_domains:
+    use_entities: []
+- bot_challenge:
+    use_entities: []
+- deny:
+    use_entities: []
+- find_internship:
+    use_entities:
+    - location
+    - field
+- find_job:
+    use_entities:
+    - location
+    - field
+- find_opportunity:
+    use_entities:
+    - location
+    - field
+    - Type
+- goodbye:
+    use_entities: []
+- greet:
+    use_entities: []
+- mode_of_work:
+    use_entities:
+    - mode
+- mood_great:
+    use_entities: []
+- mood_unhappy:
+    use_entities: []
+- nlu_fallback
+- place_of_work:
+    use_entities:
+    - location
+- scale_of_opportunity:
+    use_entities:
+    - level
+- stipend:
+    use_entities:
+    - kind_of
+- type_of_opportunity:
+    use_entities:
+    - Type
 entities:
-  - kind_of
-  - location
-  - field
-  - mode
-  - level
-  - Type
-  
-
+- location
+- field
+- mode
+- kind_of
+- level
+- Type
 slots:
   scale:
     type: categorical
@@ -69,7 +65,6 @@ slots:
     mappings:
     - type: from_entity
       entity: level
-
   category:
     type: categorical
     values:
@@ -80,7 +75,6 @@ slots:
     mappings:
     - type: from_entity
       entity: Type
-
   kind_of_internship:
     type: categorical
     values:
@@ -90,19 +84,16 @@ slots:
     - type: from_entity
       entity: kind_of
       intent: stipend
-    
   placeofwork:
     type: text
     mappings:
     - type: from_entity
       entity: location
-
   domain_of_interest:
     type: text
     mappings:
     - type: from_entity
       entity: field
-
   work_mode:
     type: categorical
     values:
@@ -112,7 +103,6 @@ slots:
     mappings:
     - type: from_entity
       entity: mode
-
 forms:
   internship_form:
     required_slots:
@@ -120,13 +110,11 @@ forms:
     - placeofwork
     - domain_of_interest
     - work_mode
-  
   job_form:
     required_slots:
     - placeofwork
     - domain_of_interest
     - work_mode
-  
   opportunity_form:
     required_slots:
     - placeofwork
@@ -134,13 +122,13 @@ forms:
     - work_mode
     - Type
     - level
-
 actions:
-  - jobsearch
-# - validate_internship_form
-# - validate_job_form
-# - validate_opportunity_form
-
+- action_flush_slots
+- action_jobsearch
+- utter_goodbye
+- utter_greet
+- utter_please_rephrase
+- utter_slots_values_job
 lookup_tables:
 - name: location
   elements:
@@ -297,7 +285,6 @@ lookup_tables:
   - Waterford
   - Dundalk
   - Derry
-
 - name: field
   elements:
   - Engineering
@@ -433,459 +420,217 @@ lookup_tables:
   - Software Development Engineering
   - Software Development Engineer
   - Software Development Engineer in Test
-
-
 - name: work_mode
   elements:
   - online
   - offline
   - hybrid
-
 - name: Type
   elements:
   - Internship
   - Job
   - Opportunity
-
 - name: level
   elements:
   - local
   - zonal
   - national
   - international
-
 synonyms:
-- synonym: "internship"
-  examples: |
-    - internship
-    - intern
-    - trainee
-    - traineeship
-    - apprenticeship
-
-- synonym: "job"
-  examples: |
-    - job
-    - employment
-    - work
-    - career
-    - profession
-    - occupation
-    - vocation
-    - calling
-    - gig
-    - position
-    - placement
-    - post
-    - role
-    - slot
-    - vacancy
-    - berth
-    - billet
-    - office
-    - post
-    - situation
-    - station
-    - task
-    - work
-    - work assignment
-    - work detail
-    - work order
-    - work task
-    - work unit
-    - workweek
-    - job
-    - job assignment
-    - job detail
-    - job order
-    - job task
-    - job unit
-    - jobweek
-    - employment
-    - job
-    - line
-    - line of work
-    - livelihood
-    - means of earning a living
-    - métier
-    - profession
-    - vocation
-    - work
-    - work activity
-    - work area
-    - work field
-    - work domain
-    - work sphere
-    - work place
-    - work site
-    - work station
-    - work unit
-
-- synonym: "opportunity"
-  examples: |
-    - scholarship
-    - grant
-    - fellowship
-    - bursary
-    - award
-    - prize
-    - courses
-    - training
-    - workshop
-    - conference
-    - seminar
-    - lecture
-    - symposium
-    - congress
-    - convention
-    - exposition
-
-- synonym: "local"
-  examples: |
-    - local
-    - regional
-    - district
-    - state
-    - provincial
-    - territorial
-    - municipal
-    - county
-    - city
-    - town
-    - village
-    - neighborhood
-    - suburb
-    - borough
-    - township
-    - parish
-    - precinct
-    - ward
-    - zone
-    - area
-    - district
-    - division
-    - section
-    - sector
-    - zone
-    - belt
-    - block
-    - precinct
-    - quarter
-    - region
-    - area
-    - belt
-    - block
-    - district
-    - division
-    - field
-    - locality
-    - zonal
-
-- synonym: "national"
-  examples: |
-    - country
-    - nation
-
-- synonym: "offline"
-  examples: |
-    - work from office
-    - on-site
-    - on-premise
-    - on-location
-    - office
-    - office-based
-    - office-bound
-    - office-going
-    - office-oriented
-    - on location
-
-- synonym: "online"
-  examples: |
-    - work from home
-    - remote
-    - remote work
-    - telecommute
-    - telecommuting
-    - telework
-    - virtual
-    - virtual work
-    - work from anywhere
-    - work from anywhere in the world
-    - work from anywhere in the country
-    - work from anywhere in the state
-    - work from anywhere in the city
-    - work from anywhere in the town
-    - work from anywhere in the village
-    - work from anywhere in the neighborhood
-    - work from anywhere in the suburb
-    - work from anywhere in the borough
-    - work from anywhere in the township
-    - work from anywhere in the parish
-    - work from anywhere in the precinct
-    - work from anywhere in the ward
-    - work from anywhere in the zone
-    - work from anywhere in the area
-    - work from anywhere in the district
-    - work from anywhere in the division
-    - work from anywhere in the section
-    - work from anywhere in the sector
-    - work from anywhere in the zone
-    - work from anywhere in the belt
-    - work from anywhere in the block
-    - work from anywhere in the precinct
-    - work from anywhere in the quarter
-    - work from anywhere in the region
-    - work from anywhere in the area
-    - work from anywhere in the belt
-    - work from anywhere in the block
-    - work from anywhere in the district
-    - work from anywhere in the division
-    - work from anywhere in the field
-    - work from anywhere in the locality
-    - work from anywhere in the zonal
-    - work from anywhere in the country
-    - work from anywhere in the nation
-    - work from anywhere in the world
-    - work from anywhere in the continent
-    - work from anywhere in the state
-    - work from anywhere in the province
-    - work from anywhere in the territory
-    - work from anywhere in the municipality
-    - work from anywhere in the county
-    - work from anywhere in the city
-    - work from anywhere in the town
-    - work from anywhere in the village
-    - work from anywhere in the neighborhood
-    - work from anywhere in the suburb
-    - work from anywhere in the borough
-    - work from anywhere in the township
-
-- synonym: "hybrid"
-  examples: |
-    - both online and offline
-    - both remote and on-site
-    - either office or home
-    - either office or remote
-    - online or offline
-
-
-
+- synonym: internship
+  examples: "- internship\n- intern\n- trainee\n- traineeship\n- apprenticeship\n"
+- synonym: job
+  examples: "- job\n- employment\n- work\n- career\n- profession\n- occupation\n- vocation\n- calling\n- gig\n- position\n- placement\n- post\n- role\n- slot\n- vacancy\n- berth\n- billet\n- office\n- post\n- situation\n- station\n- task\n- work\n- work assignment\n- work detail\n- work order\n- work task\n- work unit\n- workweek\n- job\n- job assignment\n- job detail\n- job order\n- job task\n- job unit\n- jobweek\n- employment\n- job\n- line\n- line of work\n- livelihood\n- means of earning a living\n- métier\n- profession\n- vocation\n- work\n- work activity\n- work area\n- work field\n- work domain\n- work sphere\n- work place\n- work site\n- work station\n- work unit\n"
+- synonym: opportunity
+  examples: "- scholarship\n- grant\n- fellowship\n- bursary\n- award\n- prize\n- courses\n- training\n- workshop\n- conference\n- seminar\n- lecture\n- symposium\n- congress\n- convention\n- exposition\n"
+- synonym: local
+  examples: "- local\n- regional\n- district\n- state\n- provincial\n- territorial\n- municipal\n- county\n- city\n- town\n- village\n- neighborhood\n- suburb\n- borough\n- township\n- parish\n- precinct\n- ward\n- zone\n- area\n- district\n- division\n- section\n- sector\n- zone\n- belt\n- block\n- precinct\n- quarter\n- region\n- area\n- belt\n- block\n- district\n- division\n- field\n- locality\n- zonal\n"
+- synonym: national
+  examples: "- country\n- nation\n"
+- synonym: offline
+  examples: "- work from office\n- on-site\n- on-premise\n- on-location\n- office\n- office-based\n- office-bound\n- office-going\n- office-oriented\n- on location\n"
+- synonym: online
+  examples: "- work from home\n- remote\n- remote work\n- telecommute\n- telecommuting\n- telework\n- virtual\n- virtual work\n- work from anywhere\n- work from anywhere in the world\n- work from anywhere in the country\n- work from anywhere in the state\n- work from anywhere in the city\n- work from anywhere in the town\n- work from anywhere in the village\n- work from anywhere in the neighborhood\n- work from anywhere in the suburb\n- work from anywhere in the borough\n- work from anywhere in the township\n- work from anywhere in the parish\n- work from anywhere in the precinct\n- work from anywhere in the ward\n- work from anywhere in the zone\n- work from anywhere in the area\n- work from anywhere in the district\n- work from anywhere in the division\n- work from anywhere in the section\n- work from anywhere in the sector\n- work from anywhere in the zone\n- work from anywhere in the belt\n- work from anywhere in the block\n- work from anywhere in the precinct\n- work from anywhere in the quarter\n- work from anywhere in the region\n- work from anywhere in the area\n- work from anywhere in the belt\n- work from anywhere in the block\n- work from anywhere in the district\n- work from anywhere in the division\n- work from anywhere in the field\n- work from anywhere in the locality\n- work from anywhere in the zonal\n- work from anywhere in the country\n- work from anywhere in the nation\n- work from anywhere in the world\n- work from anywhere in the continent\n- work from anywhere in the state\n- work from anywhere in the province\n- work from anywhere in the territory\n- work from anywhere in the municipality\n- work from anywhere in the county\n- work from anywhere in the city\n- work from anywhere in the town\n- work from anywhere in the village\n- work from anywhere in the neighborhood\n- work from anywhere in the suburb\n- work from anywhere in the borough\n- work from anywhere in the township\n"
+- synonym: hybrid
+  examples: "- both online and offline\n- both remote and on-site\n- either office or home\n- either office or remote\n- online or offline\n"
 responses:
   utter_greet:
-  - text: "Hey! What can I help you with today?"
+  - text: Hey! What can I help you with today?
     buttons:
-    - title: "Internship"
-      payload: "/internship_form"
-    - title: "Job"
-      payload: "/job_form"
-    - title: "Opportunity"
-      payload: "/opportunity_form"
-
+    - title: Internship
+      payload: /internship_form
+    - title: Job
+      payload: /job_form
+    - title: Opportunity
+      payload: /opportunity_form
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-  - text: "Did that help you?"
+  - text: Did that help you?
     buttons:
-    - title: "Yes"
-      payload: "/affirm" 
-    - title: "No"
-      payload: "/deny"
-
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
   utter_happy:
-  - text: "Great, carry on!"
-
+  - text: Great, carry on!
   utter_goodbye:
-  - text: "Oh! Sorry"
-
+  - text: Oh! Sorry
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa and developed by students of IGDTUW."
-
+  - text: I am a bot, powered by Rasa and developed by students of IGDTUW.
   utter_goal:
-  - text: "How can I help you?"
+  - text: How can I help you?
     buttons:
-    - title: "Internship"
-      payload: "/internship_form"
-    - title: "Job"
-      payload: "/job_form"
-    - title: "Opportunity"
-      payload: "/opportunity_form"
-
+    - title: Internship
+      payload: /internship_form
+    - title: Job
+      payload: /job_form
+    - title: Opportunity
+      payload: /opportunity_form
   utter_ask_domain_of_interest:
-  - text: "What is your field of interest?"
+  - text: What is your field of interest?
     buttons:
-    - title: "App Development"
-      intent: "area_of_interest"
+    - title: App Development
+      intent: area_of_interest
       entities:
-        - field: "App Development"
-      payload: "/internship_form{{\"field\":\"App Development\"}}"
-    - title: "Web Development"
-      intent: "area_of_interest"
+      - field: App Development
+      payload: /internship_form{{"field":"App Development"}}
+    - title: Web Development
+      intent: area_of_interest
       entities:
-        - field: "Web Development"
-      payload: "/internship_form{{\"field\":\"Web Development\"}}"
-    - title: "Software Engineering"
-      intent: "area_of_interest"
+      - field: Web Development
+      payload: /internship_form{{"field":"Web Development"}}
+    - title: Software Engineering
+      intent: area_of_interest
       entities:
-        - field: "Software Engineering"
-      payload: "/internship_form{{\"field\":\"Software Engineering\"}}"
-
+      - field: Software Engineering
+      payload: /internship_form{{"field":"Software Engineering"}}
   utter_domains:
-  - text: "Some of the available domains are- 
-           1. Web Development\n
-           2. Android Development\n
-           3. Cyber Security/Ethical Hacking\n
-           4. Marketing and Sales\n
-           5. Digital Marketing\n
-           6. Data Analyst\n
-           7. Content Writer"
-  - text: "What is your field of interest?"
+  - text: |-
+      Some of the available domains are- 1. Web Development
+       2. Android Development
+       3. Cyber Security/Ethical Hacking
+       4. Marketing and Sales
+       5. Digital Marketing
+       6. Data Analyst
+       7. Content Writer
+  - text: What is your field of interest?
     buttons:
-    - title: "App Development"
-      intent: "area_of_interest"
+    - title: App Development
+      intent: area_of_interest
       entities:
-        - field: "App Development"
-      payload: "/internship_form{{\"field\":\"App Development\"}}"
-    - title: "Web Development"
-      intent: "area_of_interest"
+      - field: App Development
+      payload: /internship_form{{"field":"App Development"}}
+    - title: Web Development
+      intent: area_of_interest
       entities:
-        - field: "Web Development"
-      payload: "/internship_form{{\"field\":\"Web Development\"}}"
-    - title: "Software Engineering"
-      intent: "area_of_interest"
+      - field: Web Development
+      payload: /internship_form{{"field":"Web Development"}}
+    - title: Software Engineering
+      intent: area_of_interest
       entities:
-        - field: "Software Engineering"
-      payload: "/internship_form{{\"field\":\"Software Engineering\"}}"
-
+      - field: Software Engineering
+      payload: /internship_form{{"field":"Software Engineering"}}
   utter_ask_work_mode:
-  - text: "What is your preffered mode of internship?"
+  - text: What is your preffered mode of internship?
     buttons:
-    - title: "Work from home"
-      intent: "mode_of_work"
+    - title: Work from home
+      intent: mode_of_work
       entities:
-        - mode: "online"
-      payload: "/internship_form{{\"mode\":\"online\"}}"
-    - title: "Work from office"
-      intent: "mode_of_work"
+      - mode: online
+      payload: /internship_form{{"mode":"online"}}
+    - title: Work from office
+      intent: mode_of_work
       entities:
-        - mode: "offline"
-      payload: "/internship_form{{\"mode\":\"offline\"}}"
-    - title: "Hybrid"
-      intent: "mode_of_work"
+      - mode: offline
+      payload: /internship_form{{"mode":"offline"}}
+    - title: Hybrid
+      intent: mode_of_work
       entities:
-        - mode: "hybrid"
-      payload: "/internship_form{{\"mode\":\"hybrid\"}}"
-      
-
+      - mode: hybrid
+      payload: /internship_form{{"mode":"hybrid"}}
   utter_ask_placeofwork:
-  - text: "Enter your preferred location of work."
+  - text: Enter your preferred location of work.
     buttons:
-    - title: "Delhi"
-      intent: "place_of_work"
+    - title: Delhi
+      intent: place_of_work
       entities:
-        - location: "Delhi"
-      payload: "/internship_form{{\"location\":\"Delhi\"}}"
-    - title: "Hyderabad"
-      intent: "place_of_work"
+      - location: Delhi
+      payload: /internship_form{{"location":"Delhi"}}
+    - title: Hyderabad
+      intent: place_of_work
       entities:
-        - location: "Hyderabad"
-      payload: "/internship_form{{\"location\":\"Hybrid\"}}"
-    - title: "Bangalore"
-      intent: "place_of_work"
+      - location: Hyderabad
+      payload: /internship_form{{"location":"Hybrid"}}
+    - title: Bangalore
+      intent: place_of_work
       entities:
-        - location: "Bangalore"
-      payload: "/internship_form{{\"location\":\"Bangalore\"}}"
-
+      - location: Bangalore
+      payload: /internship_form{{"location":"Bangalore"}}
   utter_ask_kind_of_internship:
-  - text: "Paid/Unpaid type?"
+  - text: Paid/Unpaid type?
     buttons:
-    - title: "Paid"
-      intent: "stipend"
+    - title: Paid
+      intent: stipend
       entities:
-        - kind_of: "paid"
-      payload: "/internship_form{{\"kind_of\":\"paid\"}}"
-    - title: "Unpaid"
-      intent: "stipend"
+      - kind_of: paid
+      payload: /internship_form{{"kind_of":"paid"}}
+    - title: Unpaid
+      intent: stipend
       entities:
-        - kind_of: "unpaid"
-      payload: "/internship_form{{\"kind_of\":\"paid\"}}"
-
+      - kind_of: unpaid
+      payload: /internship_form{{"kind_of":"paid"}}
   utter_ask_level:
-  - text: "Are you looking for local, national or international opportunities?"
+  - text: Are you looking for local, national or international opportunities?
     buttons:
-    - title: "Local/Regional"
-      intent: "scale_of_opportunity"
+    - title: Local/Regional
+      intent: scale_of_opportunity
       entities:
-        - level: "local"
-    - title: "National"
-      intent: "scale_of_opportunity"
+      - level: local
+    - title: National
+      intent: scale_of_opportunity
       entities:
-        - level: "national"
-    - title: "International"
-      intent: "scale_of_opportunity"
+      - level: national
+    - title: International
+      intent: scale_of_opportunity
       entities:
-        - level: "international"
-
+      - level: international
   utter_ask_Type:
-  - text: "What type of opportunity are you looking for? (Scholarships/ Fellowships/ Courses/ Conferences)"
+  - text: What type of opportunity are you looking for? (Scholarships/ Fellowships/ Courses/ Conferences)
     buttons:
-    - title: "Scholarships"
-      intent: "type_of_opportunity"
-      entities: 
-        - Type: "scholarship"
-    - title: "Fellowships"
-      intent: "type_of_opportunity"
-      entities: 
-        - Type: "fellowship"
-    - title: "Courses"
-      intent: "type_of_opportunity"
-      entities: 
-        - Type: "course"
-    - title: "Conference"
-      intent: "type_of_opportunity"
-      entities: 
-        - Type: "conference"
-
+    - title: Scholarships
+      intent: type_of_opportunity
+      entities:
+      - Type: scholarship
+    - title: Fellowships
+      intent: type_of_opportunity
+      entities:
+      - Type: fellowship
+    - title: Courses
+      intent: type_of_opportunity
+      entities:
+      - Type: course
+    - title: Conference
+      intent: type_of_opportunity
+      entities:
+      - Type: conference
   utter_search:
-  - text: "Results will be available soon..."
-  
+  - text: Results will be available soon...
   utter_slots_values_internship:
-  - text: "The following are the details you have provided:
-           Domain: {domain_of_interest}
-           Mode of work: {work_mode}
-           Place of work: {placeofwork}
-           Stipend: {kind_of_internship}"
-
+  - text: 'The following are the details you have provided: Domain: {domain_of_interest} Mode of work: {work_mode} Place of work: {placeofwork} Stipend: {kind_of_internship}'
   utter_slots_values_job:
-  - text: "The following are the details you have provided:
-           Domain: {domain_of_interest}
-           Mode of work: {work_mode}
-           Place of work: {placeofwork}"
-
+  - text: 'The following are the details you have provided: Domain: {domain_of_interest} Mode of work: {work_mode} Place of work: {placeofwork}'
   utter_slots_values_opportunity:
-  - text: "The following are the details you have provided:
-           Type: {category}
-           Level: {scale}
-           Domain: {domain_of_interest}
-           Mode of work: {work_mode}
-           Place of work: {placeofwork}"
-
-
+  - text: 'The following are the details you have provided: Type: {category} Level: {scale} Domain: {domain_of_interest} Mode of work: {work_mode} Place of work: {placeofwork}'
   utter_out_of_scope:
-  - text: Sorry, I can't handle that request. 
-
+  - text: Sorry, I can't handle that request.
   utter_please_rephrase:
-  - text: I'm sorry, I didn't quite understand that. Could you please rephrase? 
-
+  - text: I'm sorry, I didn't quite understand that. Could you please rephrase?
   utter_default:
   - text: Sorry, I didn't get that. Try asking something else.
-
-
-  
 config:
   store_entities_as_slots: true
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

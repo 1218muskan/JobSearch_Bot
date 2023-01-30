@@ -83,3 +83,41 @@ stories:
 #   - action: utter_search  
 
 
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: find_job
+  - action: job_form
+  - active_loop: job_form
+  - slot_was_set:
+    - requested_slot: placeofwork
+  - slot_was_set:
+    - placeofwork: Bangalore
+  - slot_was_set:
+    - requested_slot: domain_of_interest
+  - intent: area_of_interest
+    entities:
+    - field: Python Developer
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: job_form
+  - slot_was_set:
+    - requested_slot: domain_of_interest
+  - slot_was_set:
+    - domain_of_interest: Web Development
+  - slot_was_set:
+    - requested_slot: work_mode
+  - slot_was_set:
+    - work_mode: online
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_slots_values_job
+  - action: action_jobsearch
+  - action: action_flush_slots
+  - intent: goodbye
+  - action: utter_goodbye
+  - intent: nlu_fallback
+  - action: utter_please_rephrase

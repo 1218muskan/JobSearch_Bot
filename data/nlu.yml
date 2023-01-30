@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -29,7 +27,7 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
+    - byreee
 - intent: affirm
   examples: |
     - yes
@@ -41,7 +39,6 @@ nlu:
     - sure
     - okay
     - yes please
-
 - intent: deny
   examples: |
     - no
@@ -55,7 +52,6 @@ nlu:
     - no thanks
     - nahh
     - nah
-
 - intent: find_internship
   examples: |
     - How to get internship?
@@ -68,7 +64,6 @@ nlu:
     - I want to find internships in [Delhi](location) for [web development](field).
     - I want to find internships for [web development](field).
     - I want to find internships for [web development](field) in [Delhi](location).
-    
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -85,14 +80,12 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
 - intent: stipend
   examples: |
     - I want [paid](kind_of) internships.
@@ -100,8 +93,6 @@ nlu:
     - Look for [paid](kind_of)
     - I want [unpaid](kind_of) internships.
     - [unpaid](kind_of)
-    - [paid](kind_of)
-
 - intent: place_of_work
   examples: |
     - I want [Delhi](location) based internships.
@@ -109,7 +100,6 @@ nlu:
     - [Delhi](location).
     - [Hyderabad](location).
     - [Bangalore](location).
-
 - intent: area_of_interest
   examples: |
     - My domain is [App Development](field).
@@ -120,7 +110,7 @@ nlu:
     - I want internships in [App development](field).
     - I would like to work in [App development](field).
     - [App development](field) sounds good.
-
+    - [Python Developer](field)
 - intent: available_domains
   examples: |
     - I am confused.
@@ -129,7 +119,6 @@ nlu:
     - I have interest in more than one domains.
     - Can you suggest me some domains?
     - Show me a list of available domains.
-
 - intent: mode_of_work
   examples: |
     - [hybrid](mode)
@@ -145,7 +134,6 @@ nlu:
     - [Work from office](mode).
     - [Work from anywhere](mode).
     - [hybrid](mode) mode.
-
 - intent: find_job
   examples: |
     - I want to find a job.
@@ -155,7 +143,6 @@ nlu:
     - I want to find a job in [Delhi](location) in [App development](field).
     - I am looking for a job.
     - Show me a list of available jobs.
-
 - intent: find_opportunity
   examples: |
     - I want to find an opportunity.
@@ -167,7 +154,6 @@ nlu:
     - I am looking for an opportunity.
     - Show me a list of available opportunities.
     - Show me some [international](level) [fellowships](category).
-
 - intent: scale_of_opportunity
   examples: |
     - I want [national](level) opportunities.
@@ -176,7 +162,6 @@ nlu:
     - [international](level)
     - I am looking for [national](level) opportunities.
     - Show me some [national](level) opportunities.
-
 - intent: type_of_opportunity
   examples: |
     - I want [scholarships](category) opportunities.
@@ -193,10 +178,8 @@ nlu:
     - [Fellowship](category)
     - [Course](category)
     - [Conference](category)
-
 - intent: out_of_scope
   examples: |
     - I want to order food
     - What is 2 + 2?
     - Who's the US President?
-

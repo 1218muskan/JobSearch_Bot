@@ -343,7 +343,7 @@ class ActionOpportunity(Action):
 class ActionJobSearch(Action):
     def name(self) -> Text:
         """Unique identifier for the action."""
-        return "jobsearch"
+        return "action_jobsearch"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -359,7 +359,7 @@ class ActionJobSearch(Action):
         # If multiple found, return all of them in a list
         #open application.p pickle
         #load env variables from dotenv
-        results = linkedin_scraper('http://api.scraperapi.com?api_key=2b8b6e031d0f2382dff9abcd159cba20&url=https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={domain}&location={location}&geoId=115918471&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&start='.format(domain=domain_of_interest.replace(" ","%20"), location=placeofwork.replace(" ","%20")), 0)
+        results = linkedin_scraper("http://api.scraperapi.com?api_key=2b8b6e031d0f2382dff9abcd159cba20&url=https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={domain}&location={location}&geoId=115918471&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&start=".format(domain=domain_of_interest.replace(" ","%20"), location=placeofwork.replace(" ","%20")), 0)
         #dispatch top 5 jobs
         dispatcher.utter_message("Here are the top 5 jobs for you:")
         for i in range(5):
@@ -368,3 +368,14 @@ class ActionJobSearch(Action):
             dispatcher.utter_message(text="Location: {}".format(results[i]['location']))
             dispatcher.utter_message(text="Link: {}".format(results[i]['link']))
         return []
+
+class ActionFlushSlots(Action):
+    def name(self) -> Text:
+        """Unique identifier for the action."""
+        return "action_flush_slots"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Flushes the slots"""
+        return [SlotSet("placeofwork", None), SlotSet("domain_of_interest", None), SlotSet("work_mode", None)]
